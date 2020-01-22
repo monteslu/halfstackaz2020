@@ -1,0 +1,322 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>HalfStack AZ 2020</title>
+
+		<link rel="manifest" href="manifest.json">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section  data-background-color="rgba(16,34,61,0.9)">
+					<h1 >HalfStack AZ</h1>
+					<h1 >2020</h1>
+				</section>
+
+				<section>
+					<h2>/usr/bin/whoami ?</h2>
+					<h1>Luis Montes</h1>
+					<h1><a href="https://twitter.com/monteslu" target="_blank"><img src="images/t-icon.svg" style="border: 0; background: 0; box-shadow: 0 0 0;"></a> @MONTESLU <a href="https://github.com/monteslu" target="_blank"><img src="images/gh-icon.svg" style="border: 0; background: 0; box-shadow: 0 0 0;"></a></h1>
+				</section>
+
+				<section>
+					<H1>❤️</H1>
+					<aside class="notes">
+						Very personal story. My first love.
+					</aside>
+				</section>
+
+				<section data-background-image="images/ti81.jpg">
+					<aside class="notes">
+						Made games on this.
+					</aside>
+				</section>
+
+				<section>
+					<img src="images/xkcd.jpg" style="border: 0; background: 0; box-shadow: 0 0 0;">
+					<h2><a href="https://xkcd.com/768/" target="_blank">xkcd.com/768</a></h2>
+					<aside class="notes">
+						Still about the same hardware, but at least you can get a cable to copy programs now.
+					</aside>
+				</section>
+
+
+				<section>
+					<img src="images/ios_android.png" style="border: 0; background: 0; box-shadow: 0 0 0;">
+					<aside class="notes">
+						This is where the tech advanced
+					</aside>
+				</section>
+
+				<section>
+					<h2>Google Pixel 4 XL</h2>
+					<ul>
+						<li>Snapdragon 855 CPU</li>
+						<li>2.5 million x the RAM</li>
+						<li>128 GB storage</li>
+						<li>Multiple browsers!</li>
+						<li>Progressive Web Apps!</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Apple iPhone 11 Pro Max Ultra Extreme</h2>
+					<ul>
+						<li>Apple A13 Bionic (7 nm+) Hexacore !</li>
+						<li>1.7 million x the RAM</li>
+						<li>512 GB storage!</li>
+						<li>Mobile Safari</li>
+						<li>pRoGrEsSiVe WeB aPpS</li>
+					</ul>
+				</section>
+
+				<section>
+					
+					<img src="images/internet.svg" style="border: 0; background: 0; box-shadow: 0 0 0;">
+					<H2>why bother with PWA/offline?</H2>
+				</section>
+
+				<section data-background-image="images/upsidedown.png">
+					<aside class="notes">
+						Wake up somewhere remote.
+					</aside>
+				</section>
+
+				<section data-background-image="images/burningman.jpg">
+					<aside class="notes">
+						At burning man with a million other people clogging up the cell towers
+					</aside>
+				</section>
+
+				<section data-background-image="images/dictators_stretch.jpg">
+					<aside class="notes">
+						A ruthtless dictator decides "No internet for you!"
+					</aside>
+				</section>
+
+				<section>
+					<H3>Lie-Fi 📶</H3>
+					<img src="images/liefi.jpg" style="border: 0; background: 0; box-shadow: 0 0 0;">
+					<H3>navigator.onLine = true</H3>
+				</section>
+
+				<section>
+					<h2>PWA to the rescue?</h2>
+					<ul>
+						<li>✅Works offline</li>
+						<li>✅No app stores!</li>
+						<li>🤔Peer comunications?</li>
+						<li>🤔File sharing?</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Peer to Peer - ask</h2>
+				</pre>
+				<pre><code class="hljs" data-trim>
+const scanner = navigator.peers.scan();
+
+scanner.on('peer-found', async (peer) => {
+	const connection = await peer.connect();
+	connection.send('waddup!');
+});
+				</code></pre>
+				</section>
+
+				<section>
+					<h2>Peer to Peer - accept</h2>
+					</pre>
+					<pre><code class="hljs" data-trim>
+navigator.peers.on('peer-request', async (peer) => {
+	const connection = await peer.acceptDialog();
+	connection.send('hey!');
+});
+					</code></pre>
+					<h3>simple right?</h3>
+					</section>
+
+					<section>
+						<h2>Web Bluetooth</h2>
+						<ul>
+							<li>Since Chrome 56 stable!</li>
+							<li>Stable on MS Edge since Wednesday.</li>
+							<li>🤔   p2p ?</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Web NFC</h2>
+						<ul>
+							<li>Partial implementation in chrome.</li>
+							<li>🤔   p2p ?</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Peer to Peer - over NFC</h2>
+						</pre>
+						<pre><code class="hljs" data-trim>
+const reader = new NDEFReader();
+const writer = new NDEFWriter();
+						</code></pre>
+					</section>
+
+				
+					<section>
+						<h2>Web USB ?</h2>
+						<img src="images/usb.gif" style="border: 0; background: 0; box-shadow: 0 0 0;">
+					</section>
+	
+					
+					<section>
+						<h2><a href="https://wicg.github.io/serial/" target="_blank">Web Serial ?!?!</a></h2>
+						<img src="images/serialport.jpeg" style="border: 0; background: 0; box-shadow: 0 0 0;">
+					</section>
+	
+					<section>
+						<h2>LoRa...</h2>
+						<ul>
+							<li>✅766 km, record</li>
+							<li>✅More bandwith</li>
+							<li>✅in IoT conf badges</li>
+							<li>🤔From the web?</li>
+						</ul>
+					</section>
+	
+					<section>
+						<h2><a href="https://term.netlify.com" target="_blank">Serial relaying</a></h2>
+						<ul>
+							<li>PWA (react)</li>
+							<li>xterm.js</li>
+							<li>Node serial shim (noopkat)</li>
+							<li>LoRa hardware + esp32</li>
+						</ul>
+					</section>
+	
+					<section>
+						<h1>demo time</h1>
+						<h2><a href="https://term.netlify.com">https://term.netlify.com</a></h2>
+					</section>
+
+					<section>
+						<h2>Web Assembly</h2>
+						<img src="images/wasm.svg" style="border: 0; background: 0; box-shadow: 0 0 0; height: 40vh;">
+					</section>
+
+				<section>
+					<h2>getUserMedia({video: true})</h2>
+					<h1>📷</h1>
+				</section>
+
+				<section>
+					<img src="images/qrperf.jpeg" style="border: 0; background: 0; box-shadow: 0 0 0;">
+			 </section>
+
+				<section>
+					<h2><a href="https://qrshare.netlify.com">QR Code sharing</a></h2>
+					<ul>
+						<li>PWA (react)</li>
+						<li>File access (FileReader.readAsDataURL(...))</li>
+						<li>QR generation (canvas)</li>
+						<li>webworker QR detection...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>demo time</h1>
+					<h2><a href="https://qrshare.netlify.com">https://qrshare.netlify.com</a></h2>
+				</section>
+
+				<section>
+					<h1>The future?</h1>
+				</section>
+
+				<section>
+					<h1>HD video...</h1>
+				</section>
+
+				<section data-transition="fade-in fade-out">
+					<h2>Web RTC</h2>
+					<img src="images/webrtc2.png" style="border: 0; background: 0; box-shadow: 0 0 0;">
+				</section>
+
+				<section>
+					<h2><a href="https://www.w3.org/TR/tcp-udp-sockets/">TCP and UDP Socket API</a></h2>
+					<h3>W3C Working Group - 23 July 2015</h3>
+				</section>
+
+				
+				<section>
+					<h1>dat://</h1>
+					<ul>
+						<li>DNS</li>
+						<li>Multicast DNS</li>
+						<li>DHT</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>BeakerBrowser.com</h1>
+					<h3>with datPeers API</h3>
+				</section>
+	
+
+				<section>
+					<h1>Thank You !</h1>
+					<h2>Luis Montes</h2>
+					<h2><a href="https://twitter.com/monteslu" target="_blank">@MONTESLU</a></h2>
+				</section>
+
+
+			</div>
+		</div>
+
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				],
+				history: true
+			});
+
+			if ('serviceWorker' in navigator) {
+			  navigator.serviceWorker.register('sw.js')
+			  .then(function(reg) {
+			    console.log('Yey!!! serivceworker for the fsf slides!', reg);
+
+			  }).catch(function(err) {
+			    console.log('Boo no serviceWorker for the fsf slides!', err);
+			  });
+			}
+		</script>
+	</body>
+</html>
